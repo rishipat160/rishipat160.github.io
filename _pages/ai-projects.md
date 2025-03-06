@@ -12,12 +12,12 @@ classes: wide
   <h2>CastleEscape-RL: Reinforcement Learning for Grid-Based Escape Game</h2>
   
   <div class="project-metadata">
-    <span class="project-tech"><i class="fab fa-python"></i> PyTorch, OpenAI Gym, </span>
+    <span class="project-tech"><i class="fab fa-python"></i> PyTorch, Numpy, OpenAI Gym </span>
     <a href="https://github.com/rishipat160/CastleEscape-RL" class="project-link"><i class="fab fa-github"></i> View Code</a>
     <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
 
-  <details open>
+  <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
       <p>In this project, I tackled a challenging reinforcement learning problem: teaching an agent to navigate through a castle, avoid or defeat guards, and find the exit. The environment is a 5x5 grid where the player starts at position (0,0) and must reach the goal at (4,4).</p>
@@ -263,7 +263,7 @@ def hill_climbing_search(grid, max_iterations=1000):
   <h2>Fashion-MNIST Classifier: Deep Learning for Image Classification</h2>
   
   <div class="project-metadata">
-    <span class="project-tech"><i class="fab fa-python"></i> PyTorch, TensorFlow, NumPy, Matplotlib</span>
+    <span class="project-tech"><i class="fab fa-python"></i> PyTorch, NumPy, Matplotlib, OpenCV</span>
     <a href="https://github.com/rishipat160/Fashion-MNIST-Classifier" class="project-link"><i class="fab fa-github"></i> View Code</a>
     <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
@@ -271,7 +271,7 @@ def hill_climbing_search(grid, max_iterations=1000):
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
-      <p>In this project, I developed a deep learning model to classify clothing items from the Fashion-MNIST dataset. I implemented and compared multiple neural network architectures to achieve high accuracy while maintaining computational efficiency.</p>
+      <p>In this project, I developed and compared two neural network architectures for classifying clothing items from the Fashion-MNIST dataset. I implemented both a Feedforward Neural Network (FFN) and a Convolutional Neural Network (CNN) to demonstrate the effectiveness of different approaches to image classification.</p>
       
       <h3>The Dataset</h3>
       <p>Fashion-MNIST consists of:</p>
@@ -279,22 +279,114 @@ def hill_climbing_search(grid, max_iterations=1000):
         <li>60,000 training images and 10,000 test images</li>
         <li>28x28 grayscale images of clothing items</li>
         <li>10 different classes (T-shirts, trousers, dresses, etc.)</li>
-        <li>A drop-in replacement for the original MNIST dataset with more challenging patterns</li>
+        <li>A more challenging alternative to the original MNIST dataset</li>
       </ul>
       
       <h3>My Approach</h3>
-      <p>I implemented three different neural network architectures and compared their performance:</p>
+      <p>I implemented two different neural network architectures and compared their performance:</p>
       
-      <h4>1. Convolutional Neural Network (CNN)</h4>
-      <p>My primary model was a CNN with the following architecture:</p>
+      <h4>1. Feedforward Neural Network (FFN)</h4>
+      <p>I designed a multi-layer FFN with the following architecture:</p>
       
       {% highlight python %}
-class FashionCNN(nn.Module):
+class FF_Net(nn.Module):
     def __init__(self):
-        
+        super().__init__()
+        self.fc1 = nn.Linear(784, 1024)
+        self.bn1 = nn.BatchNorm1d(1024)
+        self.fc2 = nn.Linear(1024, 512)
+        self.bn2 = nn.BatchNorm1d(512)
+        self.fc3 = nn.Linear(512, 256)
+        self.bn3 = nn.BatchNorm1d(256)
+        self.fc4 = nn.Linear(256, 128)
+        self.bn4 = nn.BatchNorm1d(128)
+        self.fc5 = nn.Linear(128, 10)
+        self.dropout = nn.Dropout(0.3)
       {% endhighlight %}
       
-      <p>This visualization helped me understand what features the model was using to make its predictions and identify potential biases or failure modes.</p>
+      <p>Key features of the FFN:</p>
+      <ul>
+        <li>5 fully connected layers with decreasing sizes</li>
+        <li>Batch normalization after each layer except the output</li>
+        <li>ReLU activation functions</li>
+        <li>Dropout for regularization</li>
+      </ul>
+      
+      <h4>2. Convolutional Neural Network (CNN)</h4>
+      <p>I implemented a CNN with the following architecture:</p>
+      
+      {% highlight python %}
+class Conv_Net(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 64, 3, padding=1)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.conv2 = nn.Conv2d(64, 128, 3, padding=1)
+        self.bn2 = nn.BatchNorm2d(128)
+        self.conv3 = nn.Conv2d(128, 256, 3, padding=1)
+        self.bn3 = nn.BatchNorm2d(256)
+        
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(256 * 3 * 3, 1024)
+        self.fc2 = nn.Linear(1024, 512)
+        self.fc3 = nn.Linear(512, 10)
+        self.dropout = nn.Dropout(0.4)
+      {% endhighlight %}
+      
+      <p>Key features of the CNN:</p>
+      <ul>
+        <li>3 convolutional layers with increasing filter counts</li>
+        <li>Batch normalization after each convolutional layer</li>
+        <li>Max pooling for spatial dimension reduction</li>
+        <li>3 fully connected layers</li>
+        <li>Dropout for regularization</li>
+      </ul>
+      
+      <h3>Training and Evaluation</h3>
+      <p>I trained both models using:</p>
+      <ul>
+        <li>Adam optimizer with learning rate scheduling</li>
+        <li>Cross-entropy loss function</li>
+        <li>Batch size of 32</li>
+        <li>15 epochs for the FFN and 12 epochs for the CNN</li>
+      </ul>
+      
+      <h3>Results and Visualization</h3>
+      <p>The CNN consistently outperformed the FFN in terms of accuracy, demonstrating the effectiveness of convolutional layers for image classification tasks.</p>
+      
+      <p>I also implemented visualization techniques to better understand the CNN's behavior:</p>
+      
+      <h4>Kernel Visualization</h4>
+      <p>I extracted and visualized the first-layer convolutional kernels to see what patterns the network was detecting:</p>
+      
+      {% highlight python %}
+# Extract the weights of the first convolutional layer
+weights = conv_net.conv1.weight.data
+num_kernels = weights.shape[0]
+
+# Create a visualization grid for the convolutional kernels
+grid_size = int(numpy.ceil(numpy.sqrt(num_kernels)))
+fig = plt.figure(figsize=(10, 10))
+
+for i in range(num_kernels):
+    kernel = weights[i, 0].detach().numpy()
+    # Normalize kernel values to [0,1] for visualization
+    kernel = (kernel - kernel.min()) / (kernel.max() - kernel.min())
+    plt.subplot(grid_size, grid_size, i + 1)
+    plt.imshow(kernel, cmap='gray')
+    plt.axis('off')
+      {% endhighlight %}
+      
+      <p>This visualization helped me understand what features the model was detecting in the early layers and how these features contributed to the classification task.</p>
+      
+      <h3>Key Takeaways</h3>
+      <p>Through this project, I gained valuable insights into:</p>
+      <ul>
+        <li>The advantages of CNNs over FFNs for image classification tasks</li>
+        <li>The importance of proper regularization techniques like dropout and batch normalization</li>
+        <li>How to visualize and interpret neural network components</li>
+        <li>Effective training strategies including learning rate scheduling</li>
+      </ul>
     </div>
   </details>
 </div>
