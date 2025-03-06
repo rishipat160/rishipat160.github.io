@@ -22,7 +22,7 @@ search: false
   .project-card {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     background-color: #ffffff;
     transition: transform 0.2s ease-in-out;
@@ -31,6 +31,11 @@ search: false
   .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  .project-card h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   
   .project-metadata {

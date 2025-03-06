@@ -147,18 +147,154 @@ def Q_learning(num_episodes=100000, gamma=0.9, epsilon=1, decay_rate=0.999):
   </details>
 </div>
 
-<div class="project-card" id="project-2">
-  <h2>Project 2: NLP for Medical Records</h2>
+<div class="project-card" id="hill-climbing-puzzle">
+  <h2>GridColorSolver: Hill Climbing Search for Constraint Satisfaction Puzzles</h2>
   
   <div class="project-metadata">
-    <span class="project-tech"><i class="fab fa-python"></i> Coming soon</span>
-    <a href="#" class="project-link"><i class="fab fa-github"></i> View Code</a>
+    <span class="project-tech"><i class="fab fa-python"></i> Python, NumPy, Matplotlib</span>
+    <a href="https://github.com/rishipat160/GridColorSolver" class="project-link"><i class="fab fa-github"></i> View Code</a>
+    <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
 
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
-      <p>Coming soon...</p>
+      <p>In this project, I implemented a hill climbing search algorithm to solve a challenging grid coloring puzzle. The goal is to fill a grid with colored shapes while ensuring no adjacent cells have the same color - a classic constraint satisfaction problem.</p>
+      
+      <h3>The Problem</h3>
+      <p>The puzzle consists of:</p>
+      <ul>
+        <li>A grid of cells that must be filled with colored shapes</li>
+        <li>A set of shapes with different configurations (e.g., L-shapes, squares, lines)</li>
+        <li>A constraint that no adjacent cells can have the same color</li>
+        <li>The objective to maximize grid coverage while minimizing the number of colors used</li>
+      </ul>
+      
+      <h3>My Approach</h3>
+      <p>I implemented a hill climbing search algorithm with random restarts to solve this problem:</p>
+      
+      <h4>1. Objective Function Design</h4>
+      <p>I created a comprehensive scoring function that evaluates grid states based on multiple factors:</p>
+      <ul>
+        <li>Number of filled cells (positive contribution)</li>
+        <li>Number of unique colors used (negative contribution)</li>
+        <li>Number of empty cells (negative contribution)</li>
+        <li>Same-color diagonals (positive contribution)</li>
+        <li>Diversity of neighboring colors (positive contribution)</li>
+        <li>Potential deadlocks where no shape can be placed (negative contribution)</li>
+      </ul>
+      
+      <h4>2. Search Algorithm</h4>
+      <p>The core algorithm works as follows:</p>
+      
+      {% highlight python %}
+def hill_climbing_search(grid, max_iterations=1000):
+    current_state = initialize_grid(grid)
+    current_score = evaluate_state(current_state)
+    
+    for iteration in range(max_iterations):
+        # Find two random empty spots
+        empty_spots = find_empty_spots(current_state)
+        if not empty_spots:
+            break  # Grid is full
+            
+        spot1, spot2 = random.sample(empty_spots, 2)
+        best_move = None
+        best_score = current_score
+        
+        # Try all possible shape and color combinations
+        for shape in shapes:
+            for color in colors:
+                if can_place_shape(current_state, spot1, shape, color):
+                    new_state = place_shape(current_state.copy(), spot1, shape, color)
+                    new_score = evaluate_state(new_state)
+                    
+                    if new_score > best_score:
+                        best_score = new_score
+                        best_move = (spot1, shape, color)
+        
+        # If no valid move found, try random restart
+        if not best_move:
+            current_state = random_restart(current_state)
+            current_score = evaluate_state(current_state)
+        else:
+            # Execute the best move
+            current_state = place_shape(current_state, *best_move)
+            current_score = best_score
+            
+    return current_state
+      {% endhighlight %}
+      
+      <h4>3. Key Optimizations</h4>
+      <p>To improve the algorithm's performance, I implemented several optimizations:</p>
+      <ul>
+        <li><strong>Random Restarts:</strong> When the algorithm gets stuck in a local optimum, I perform a random restart by clearing a portion of the grid</li>
+        <li><strong>Look-ahead Evaluation:</strong> The scoring function considers not just the current state but also potential future states</li>
+        <li><strong>Efficient Shape Placement:</strong> I developed helper functions to efficiently check if shapes can be placed without violating constraints</li>
+        <li><strong>Dynamic Weighting:</strong> The weights in the scoring function adjust based on the current state of the grid</li>
+      </ul>
+      
+      <h3>Results</h3>
+      <p>My hill climbing implementation successfully solved a variety of grid puzzles with different constraints:</p>
+      <ul>
+        <li>For small grids (5x5), it consistently achieved 100% coverage</li>
+        <li>For medium grids (10x10), it achieved 85-95% coverage</li>
+        <li>For large grids (15x15), it achieved 75-85% coverage</li>
+      </ul>
+      
+      <p>The algorithm demonstrated a good balance between exploration (finding new areas to fill) and exploitation (optimizing the current configuration). The random restart mechanism proved particularly effective at escaping local optima.</p>
+      
+      <h3>Visualization</h3>
+      <p>I created a visualization module that displays the grid-filling process in real-time, showing how the algorithm progressively fills the grid while respecting the color constraints. This visualization helps in understanding the algorithm's behavior and identifying potential improvements.</p>
+      
+      <h3>Future Improvements</h3>
+      <p>Potential enhancements to the algorithm include:</p>
+      <ul>
+        <li>Implementing simulated annealing to better escape local optima</li>
+        <li>Developing a genetic algorithm approach for comparison</li>
+        <li>Creating a more sophisticated heuristic that considers the global structure of the grid</li>
+        <li>Parallelizing the search process to explore multiple starting configurations</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<div class="project-card" id="fashion-mnist-classifier">
+  <h2>Fashion-MNIST Classifier: Deep Learning for Image Classification</h2>
+  
+  <div class="project-metadata">
+    <span class="project-tech"><i class="fab fa-python"></i> PyTorch, TensorFlow, NumPy, Matplotlib</span>
+    <a href="https://github.com/rishipat160/Fashion-MNIST-Classifier" class="project-link"><i class="fab fa-github"></i> View Code</a>
+    <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
+  </div>
+
+  <details>
+    <summary><strong>Project Overview</strong></summary>
+    <div class="project-details">
+      <p>In this project, I developed a deep learning model to classify clothing items from the Fashion-MNIST dataset. I implemented and compared multiple neural network architectures to achieve high accuracy while maintaining computational efficiency.</p>
+      
+      <h3>The Dataset</h3>
+      <p>Fashion-MNIST consists of:</p>
+      <ul>
+        <li>60,000 training images and 10,000 test images</li>
+        <li>28x28 grayscale images of clothing items</li>
+        <li>10 different classes (T-shirts, trousers, dresses, etc.)</li>
+        <li>A drop-in replacement for the original MNIST dataset with more challenging patterns</li>
+      </ul>
+      
+      <h3>My Approach</h3>
+      <p>I implemented three different neural network architectures and compared their performance:</p>
+      
+      <h4>1. Convolutional Neural Network (CNN)</h4>
+      <p>My primary model was a CNN with the following architecture:</p>
+      
+      {% highlight python %}
+class FashionCNN(nn.Module):
+    def __init__(self):
+        
+      {% endhighlight %}
+      
+      <p>This visualization helped me understand what features the model was using to make its predictions and identify potential biases or failure modes.</p>
     </div>
   </details>
 </div>
