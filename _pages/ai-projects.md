@@ -351,7 +351,21 @@ class Conv_Net(nn.Module):
       </ul>
       
       <h3>Results and Visualization</h3>
-      <p>The CNN consistently outperformed the FFN in terms of accuracy, demonstrating the effectiveness of convolutional layers for image classification tasks.</p>
+      <p>The CNN consistently outperformed the FFN in terms of accuracy, demonstrating the effectiveness of convolutional layers for image classification tasks:</p>
+      
+      <h4>Feedforward Network Results:</h4>
+      <ul>
+        <li>Test accuracy: 87.7%</li>
+        <li>Training subset accuracy: 90.7%</li>
+        <li>Mean accuracy: 88.2%</li>
+      </ul>
+      
+      <h4>Convolutional Network Results:</h4>
+      <ul>
+        <li>Test accuracy: 90.18%</li>
+        <li>Training subset accuracy: 94.4%</li>
+        <li>Mean accuracy: 90.88%</li>
+      </ul>
       
       <p>I also implemented visualization techniques to better understand the CNN's behavior:</p>
       
