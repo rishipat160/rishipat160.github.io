@@ -6,6 +6,8 @@ author_profile: false
 classes: wide
 ---
 
+<h1 class="page-title">Data Science Projects</h1>
+
 <div class="projects-container">
 
 <div class="project-card" id="faa-birdstrike-analysis">

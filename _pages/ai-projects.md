@@ -6,6 +6,8 @@ author_profile: false
 classes: wide
 ---
 
+<h1 class="page-title">Artificial Intelligence Projects</h1>
+
 <div class="projects-container">
 
 <div class="project-card" id="castleescape-rl">
