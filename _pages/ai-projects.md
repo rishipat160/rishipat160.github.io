@@ -265,7 +265,6 @@ def hill_climbing_search(grid, max_iterations=1000):
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-python"></i> PyTorch, NumPy, Matplotlib, OpenCV</span>
     <a href="https://github.com/rishipat160/Fashion-MNIST-Classifier" class="project-link"><i class="fab fa-github"></i> View Code</a>
-    <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
 
   <details>

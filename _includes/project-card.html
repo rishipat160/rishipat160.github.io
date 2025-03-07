@@ -1,0 +1,33 @@
+<div id="{{ include.id }}" class="project-card">
+    <h2>{{ include.title }}</h2>
+    
+    {% if include.icon %}
+    <div class="project-icon">
+      <i class="fab fa-{{ include.icon }}"></i>
+    </div>
+    {% endif %}
+    
+    {% if include.tech %}
+    <div class="project-tech">
+      <strong>Technologies:</strong> {{ include.tech }}
+    </div>
+    {% endif %}
+    
+    <div class="project-links">
+      {% if include.github %}
+      <a href="{{ include.github }}" class="btn btn--primary" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      {% endif %}
+      
+      {% if include.demo and include.demo != "#" %}
+      <a href="{{ include.demo }}" class="btn btn--info" target="_blank">
+        <i class="fas fa-external-link-alt"></i> Demo
+      </a>
+      {% endif %}
+    </div>
+    
+    <div class="project-content">
+      {{ include.content }}
+    </div>
+  </div>

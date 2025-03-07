@@ -3,6 +3,14 @@ title: "About Me"
 permalink: /about/
 layout: splash
 author_profile: false
+header:
+  overlay_image: /assets/images/mining-machine.jpg
+  overlay_filter: 0.5  # darkens the image (0 to 1 scale)
+  caption: "My Mining Machine"
+  image_description: "A high-performance cryptocurrency mining machine"
+  actions:
+    - label: "View Resume"
+      url: "/resume/"
 ---
 
 ##  Hi, I'm Rishi Patel
@@ -32,4 +40,4 @@ I am a Machine Learning and Computer Vision enthusiast, currently pursuing my MS
 - **BS in Biology**, Seton Hall University
 
 ###  Connect With Me
-📧 [Email](mailto:patel.rishi3@northeastern.edu) | 🔗 [GitHub](https://github.com/rishipat160) | 💼 [LinkedIn](https://www.linkedin.com/in/rishipatelneu/)
+[Email](mailto:patel.rishi3@northeastern.edu) | [GitHub](https://github.com/rishipat160) | [LinkedIn](https://www.linkedin.com/in/rishipatelneu/)
