@@ -108,28 +108,3 @@ search: false
   .page__hero--overlay {
     min-height: 300px; 
   }
-
-/* Homepage project grid */
-.project-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.project-item {
-  padding: 1.5rem;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.project-item h2 {
-  margin-top: 0;
-}
-
-@media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-}

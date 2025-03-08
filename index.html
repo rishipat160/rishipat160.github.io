@@ -1,58 +1,46 @@
 ---
-layout: home
-author_profile: true
-feature_row:
-  - title: "AI Projects"
-    excerpt: "Projects focused on artificial intelligence and machine learning."
-    url: "/ai-projects/"
-    btn_label: "View AI Projects"
-    btn_class: "btn--primary"
-  - title: "Data Science Projects"
-    excerpt: "Projects involving data analysis and visualization."
-    url: "/ds-projects/"
-    btn_label: "View DS Projects"
-    btn_class: "btn--primary"
-  - title: "CV Projects"
-    excerpt: "Projects involving computer vision and image processing."
-    url: "/cv-projects/"
-    btn_label: "View CV Projects"
-    btn_class: "btn--primary"
-  - title: "General Projects"
-    excerpt: "Other software development and programming projects."
-    url: "/general-projects/"
-    btn_label: "View General Projects"
-    btn_class: "btn--primary"
+layout: splash
+title: "Rishi Patel's Portfolio"
+permalink: /
+header:
+  overlay_color: "#000"
+  overlay_filter: "0.5"
+  overlay_image: /assets/images/splash.png
+  actions:
+    - label: "View Resume"
+      url: "/resume/"
+excerpt: "MS in Computer Science student at Northeastern University specializing in AI/ML, Computer Vision, and Data Science."
 ---
 
-<h1>Welcome!</h1>
+<style>
+  .page__content {
+    padding-top: 0 !important;
+  }
+  .page__hero--overlay {
+    margin-bottom: 0 !important;
+  }
+</style>
 
-<p>Check out my projects! I have classified my projects via their purpose.</p>
+<div style="text-align: center; margin-top: 1.5rem;">
+  <p>Currently seeking a Summer or Fall 2025 internship! Check out my projects below, classified by their purpose.</p>
+</div>
 
-
-<p>Currently seeking a Summer or Fall 2025 internship!</p>
-
-<div class="project-grid">
-  <div class="project-item">
-    <h2>AI Projects</h2>
-    <p>Projects focused on artificial intelligence and machine learning.</p>
-    <a href="/ai-projects/" class="btn btn--primary">View AI Projects</a>
+<div class="project-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem auto; max-width: 1200px;">
+  <div class="project-item" style="width: 300px; padding: 1.2rem; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+    <h2 style="font-size: 1.4rem; margin-top: 0; margin-bottom: 0.7rem;">AI Projects</h2>
+    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #555;">Projects focused on artificial intelligence and machine learning.</p>
+    <a href="/ai-projects/" class="btn btn--primary" style="width: 100%; text-align: center; padding: 0.5rem 0;">View AI Projects</a>
   </div>
   
-  <div class="project-item">
-    <h2>Data Science Projects</h2>
-    <p>Projects involving data analysis and visualization.</p>
-    <a href="/ds-projects/" class="btn btn--primary">View DS Projects</a>
+  <div class="project-item" style="width: 300px; padding: 1.2rem; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+    <h2 style="font-size: 1.4rem; margin-top: 0; margin-bottom: 0.7rem;">Data Science Projects</h2>
+    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #555;">Projects involving data analysis and visualization.</p>
+    <a href="/ds-projects/" class="btn btn--primary" style="width: 100%; text-align: center; padding: 0.5rem 0;">View DS Projects</a>
   </div>
   
-  <div class="project-item">
-    <h2>CV Projects</h2>
-    <p>Projects involving computer vision and image processing.</p>
-    <a href="/cv-projects/" class="btn btn--primary">View CV Projects</a>
-  </div>
-  
-  <div class="project-item">
-    <h2>General Projects</h2>
-    <p>Other software development and programming projects.</p>
-    <a href="/general-projects/" class="btn btn--primary">View General Projects</a>
+  <div class="project-item" style="width: 300px; padding: 1.2rem; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+    <h2 style="font-size: 1.4rem; margin-top: 0; margin-bottom: 0.7rem;">CV Projects</h2>
+    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #555;">Projects involving computer vision and image processing.</p>
+    <a href="/cv-projects/" class="btn btn--primary" style="width: 100%; text-align: center; padding: 0.5rem 0;">View CV Projects</a>
   </div>
 </div>

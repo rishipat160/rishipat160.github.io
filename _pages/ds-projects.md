@@ -18,6 +18,14 @@ classes: wide
     <a href="https://github.com/rishipat160/FAABirdStrikeAnalysis" class="project-link"><i class="fab fa-github"></i> View Code</a>
   </div>
 
+  <div class="project-summary">
+    <ul>
+      <li>Designed and implemented a normalized relational database for FAA wildlife strike data</li>
+      <li>Created complex SQL queries including CTEs to analyze patterns in bird strikes</li>
+      <li>Developed visualizations to identify trends across airlines, airports, and time periods</li>
+    </ul>
+  </div>
+
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
@@ -259,6 +267,14 @@ END
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-r-project"></i> R, MySQL, XML, dplyr, ggplot2, RMySQL, RSQLite</span>
     <a href="https://github.com/rishipat160/PharmaDataWarehouse" class="project-link"><i class="fab fa-github"></i> View Code</a>
+  </div>
+
+  <div class="project-summary">
+    <ul>
+      <li>Built a complete ETL pipeline to process pharmaceutical sales data from XML sources</li>
+      <li>Implemented both normalized relational database and star schema for analytics</li>
+      <li>Created visualizations to identify key revenue drivers and sales representative performance</li>
+    </ul>
   </div>
 
   <details>

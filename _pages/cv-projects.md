@@ -20,6 +20,14 @@ classes: wide
     <a href="/assets/files/object_recognition_paper.pdf" class="project-link"><i class="fas fa-file-pdf"></i> Paper</a>
   </div>
 
+  <div class="project-summary">
+    <ul>
+      <li>Built a real-time object recognition system using classical computer vision techniques (no deep learning)</li>
+      <li>Implemented feature extraction using shape descriptors, Hu moments, and geometric properties</li>
+      <li>Created a classification system with multiple distance metrics achieving >90% accuracy for distinct objects</li>
+    </ul>
+  </div>
+
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
@@ -333,6 +341,30 @@ clean:
       </div>
       
       <p class="disclaimer"><em>Note: This project was developed as a proof-of-concept with a focus on functionality and results. The codebase would benefit from refactoring to improve modularity, readability, and maintainability. Future iterations would separate components into distinct modules and implement better error handling.</em></p>
+    </div>
+  </details>
+</div>
+
+<div class="project-card" id="realtime-filters">
+  <h2>Real-time Filters Application with OpenCV: Interactive Image Processing</h2>
+  
+  <div class="project-metadata">
+    <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Image Processing</span>
+    <span class="project-status"><i class="fas fa-clock"></i> Coming 03/10/2025</span>
+  </div>
+
+  <div class="project-summary">
+    <ul>
+      <li>Developed a real-time video filtering application with interactive controls</li>
+      <li>Implemented various image processing algorithms for visual effects</li>
+      <li>Created a user-friendly interface for combining and customizing filters</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary><strong>Project Overview</strong></summary>
+    <div class="project-details">
+      <p>This project implements a real-time video filtering application using OpenCV and C++. The system will apply various image processing filters to webcam input in real-time, allowing users to interactively modify and combine different effects.</p>
     </div>
   </details>
 </div>

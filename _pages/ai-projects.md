@@ -19,6 +19,14 @@ classes: wide
     <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
 
+  <div class="project-summary">
+    <ul>
+      <li>Implemented Q-learning and Monte Carlo methods to solve a complex grid-based escape game</li>
+      <li>Designed a custom environment with stochastic transitions and strategic combat decisions</li>
+      <li>Trained an agent to navigate, avoid or defeat guards, and find optimal paths to the exit</li>
+    </ul>
+  </div>
+
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
@@ -158,6 +166,14 @@ def Q_learning(num_episodes=100000, gamma=0.9, epsilon=1, decay_rate=0.999):
     <a href="#" class="project-link"><i class="fas fa-play-circle"></i> Demo (coming soon!)</a>
   </div>
 
+  <div class="project-summary">
+    <ul>
+      <li>Developed a hill climbing search algorithm with random restarts to solve grid coloring puzzles</li>
+      <li>Created a sophisticated scoring function to evaluate grid states based on multiple factors</li>
+      <li>Achieved high grid coverage while maintaining color constraints across various puzzle sizes</li>
+    </ul>
+  </div>
+
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
@@ -267,6 +283,14 @@ def hill_climbing_search(grid, max_iterations=1000):
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-python"></i> PyTorch, NumPy, Matplotlib, OpenCV</span>
     <a href="https://github.com/rishipat160/Fashion-MNIST-Classifier" class="project-link"><i class="fab fa-github"></i> View Code</a>
+  </div>
+
+  <div class="project-summary">
+    <ul>
+      <li>Implemented and compared Feedforward and Convolutional Neural Networks for image classification</li>
+      <li>Achieved 90.18% accuracy on the Fashion-MNIST dataset using a custom CNN architecture</li>
+      <li>Visualized network kernels to interpret learned features and model behavior</li>
+    </ul>
   </div>
 
   <details>

@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes@4.26.2"
-minimal_mistakes_skin    : "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -67,7 +67,7 @@ reCaptcha:
   secret                 :
 atom_feed:
   path                   : # blank (default) uses feed.xml
-  hide                   : # true, false (default)
+  hide                   : true  # Set this to true to hide the feed link
 search                   : # true, false (default)
 search_full_content      : # true, false (default)
 search_provider          : # lunr (default), algolia, google
@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "Rishi Patel"
-  avatar           : "/assets/images/bio-photo.png"
+  avatar           : #
   bio              : "A student at Northeastern University pursuing a Master's in Computer Science."
   location         : "Boston, MA & Bay Area, CA"
   email            : "patel.rishi3@northeastern.edu"
@@ -135,8 +135,15 @@ author:
 # Site Footer
 footer:
   links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:patel.rishi3@northeastern.edu"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
+      url: "https://github.com/rishipat160"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/rishipatelneu/"
 
 
 # Reading Files
