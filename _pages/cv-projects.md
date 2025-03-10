@@ -350,7 +350,7 @@ clean:
   
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Image Processing</span>
-    <span class="project-status"><i class="fas fa-clock"></i> Coming 03/10/2025</span>
+    <a href="https://github.com/rishipat160/VideoFilters" class="project-link"><i class="fab fa-github"></i> Code</a>
   </div>
 
   <div class="project-summary">
@@ -364,7 +364,281 @@ clean:
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
-      <p>This project implements a real-time video filtering application using OpenCV and C++. The system will apply various image processing filters to webcam input in real-time, allowing users to interactively modify and combine different effects.</p>
+      <p>This project implements a real-time video filtering application using OpenCV and C++. The system applies various image processing filters to webcam input in real-time, allowing users to interactively modify and combine different effects.</p>
+      
+      <h3>Key Features</h3>
+      <ul>
+        <li>Real-time video capture and processing</li>
+        <li>Multiple filter implementations including grayscale, sepia, blur, edge detection, and more</li>
+        <li>Face detection using Haar cascades</li>
+        <li>Creative filters like cartoon and sketch effects</li>
+        <li>Depth estimation using Depth Anything V2 neural network</li>
+        <li>Interactive keyboard controls for toggling effects</li>
+      </ul>
+      
+      <h3>Filter Implementations</h3>
+      <p>The project includes several custom filter implementations:</p>
+      
+      {% highlight cpp %}
+/**
+ * alternativeGrayscale
+ * 
+ * This function implements an alternative grayscale filter.
+ * It creates a grayscale image by averaging the blue and green channels,
+ * ignoring the red channel. Each output pixel's RGB values are set to
+ * this average value.
+ */
+int alternativeGrayscale(cv::Mat &src, cv::Mat &dst) {
+    // Check if input image is empty
+    if (src.empty()) {
+        return -1;
+    }
+
+    // Create destination image of same size as source
+    dst.create(src.size(), CV_8UC3);  // 8-bit, 3 channels  
+
+    // For each pixel in the image
+    for (int i = 0; i < src.rows; i++) {
+        for (int j = 0; j < src.cols; j++) {
+            // Get original BGR values (OpenCV uses BGR order)
+            cv::Vec3b pixel = src.at<cv::Vec3b>(i, j);
+            
+            // Calculate average of blue and green channels
+            uchar avg = (pixel[0] + pixel[1]) / 2;
+            
+            // Set all channels to the average value
+            dst.at<cv::Vec3b>(i, j) = cv::Vec3b(avg, avg, avg);
+        }
+    }
+
+    return 0;
+}
+      {% endhighlight %}
+      
+      <h3>Cartoon Effect</h3>
+      <p>One of the more advanced filters is the cartoon effect, which combines bilateral filtering with edge detection:</p>
+      
+      {% highlight cpp %}
+/**
+ * cartoon_filter
+ * 
+ * This function creates a cartoon effect by combining edge detection with
+ * bilateral filtering. It smooths the image while preserving edges, then
+ * overlays strong edges in black to create a cartoon-like appearance.
+ */
+int cartoon_filter(cv::Mat &src, cv::Mat &dst) {
+    if (src.empty()) return -1;
+
+    // Step 1: Bilateral filter for smoothing while preserving edges
+    cv::Mat filtered;
+    cv::bilateralFilter(src, filtered, 9, 75, 75);
+
+    // Step 2: Edge detection using DoG
+    cv::Mat gray, blur1, blur2, edges;
+    cv::cvtColor(filtered, gray, cv::COLOR_BGR2GRAY);
+    blur5x5_1(gray, blur1);
+    blur5x5_1(blur1, blur2);
+    
+    edges = cv::Mat::zeros(src.size(), CV_8UC1);
+    for(int i = 0; i < src.rows; i++) {
+        for(int j = 0; j < src.cols; j++) {
+            edges.at<uchar>(i,j) = (blur1.at<uchar>(i,j) - blur2.at<uchar>(i,j) > 20) ? 255 : 0;
+        }
+    }
+    
+    // Step 3: Create cartoon effect by combining filtered image with edges
+    dst = filtered.clone();
+    for(int i = 0; i < src.rows; i++) {
+        for(int j = 0; j < src.cols; j++) {
+            if(edges.at<uchar>(i,j) == 255) {
+                dst.at<cv::Vec3b>(i,j) = cv::Vec3b(0,0,0);
+            }
+        }
+    }
+    
+    return 0;
+}
+      {% endhighlight %}
+      
+      <h3>Depth Estimation</h3>
+      <p>The project also includes depth estimation using the Depth Anything V2 neural network:</p>
+      
+      {% highlight cpp %}
+int main(int argc, char *argv[]) {
+  cv::VideoCapture *capdev;
+  cv::Mat src; 
+  cv::Mat dst;
+  cv::Mat dst_vis;
+  char filename[256]; 
+  const float reduction = 0.5;
+
+  // make a DANetwork object
+  DA2Network da_net("C:/Users/rishi/Desktop/CV/Project 1/data/model_fp16.onnx");
+
+  // open the video device
+  capdev = new cv::VideoCapture(0 + cv::CAP_DSHOW);
+  if( !capdev->isOpened() ) {
+    printf("Unable to open video device\n");
+    return(-1);
+  }
+
+  // get some properties of the image
+  cv::Size refS( (int) capdev->get(cv::CAP_PROP_FRAME_WIDTH ),
+		 (int) capdev->get(cv::CAP_PROP_FRAME_HEIGHT));
+  printf("Expected size: %d %d\n", refS.width, refS.height);
+
+  cv::namedWindow("video", 1); // identifies a window
+  cv::namedWindow("depth", 1); // identifies a window
+
+  // Main processing loop
+  for(;;) {
+    *capdev >> src; // get a new frame from the camera, treat as a stream
+    if( src.empty() ) {
+      printf("frame is empty\n");
+      break;
+    }
+
+    // apply the network to the image
+    da_net.set_input( src, reduction );
+    da_net.run_network( dst, src.size() );
+
+    // apply a color map to the depth output to get a good visualization
+    cv::applyColorMap(dst, dst_vis, cv::COLORMAP_INFERNO);
+
+    // display the images
+    cv::imshow("video", src);
+    cv::imshow("depth", dst_vis);
+
+    // terminate if the user types 'q'
+    char key = cv::waitKey(10);
+    if( key == 'q' ) {
+      break;
+    }
+  }
+
+  return(0);
+}
+      {% endhighlight %}
+      
+      <h3>Interactive Controls</h3>
+      <p>The application provides a simple keyboard interface for toggling filters:</p>
+      
+      {% highlight cpp %}
+char key = cv::waitKey(10);
+switch(key) {
+    case 'q': goto cleanup;  // quit
+    case 's': {  // save frame
+        static int count = 0;
+        cv::imwrite("image_" + std::to_string(count++) + ".jpg", frame);
+        break;
+    }
+    case 'g': filters[GRAYSCALE] = !filters[GRAYSCALE]; break;
+    case 'h': filters[ALT_GRAY] = !filters[ALT_GRAY]; break;
+    case 'e': filters[SEPIA] = !filters[SEPIA]; break;
+    case 'b': filters[BLUR1] = !filters[BLUR1]; break;
+    case 'n': filters[BLUR2] = !filters[BLUR2]; break;
+    case 'x': filters[SOBEL_X] = !filters[SOBEL_X]; break;
+    case 'y': filters[SOBEL_Y] = !filters[SOBEL_Y]; break;
+    case 'm': 
+        filters[MAGNITUDE] = !filters[MAGNITUDE];
+        filters[SOBEL_X] = filters[SOBEL_Y] = false;
+        break;
+    case 'i': filters[BLUR_QUANT] = !filters[BLUR_QUANT]; break;
+    case 'f': filters[FACES] = !filters[FACES]; break;
+    case 'c': filters[CARTOON] = !filters[CARTOON]; break;
+    case 'k': filters[SKETCH] = !filters[SKETCH]; break;
+    case 'j': filters[ALT_GRAY2] = !filters[ALT_GRAY2]; break;
+}
+      {% endhighlight %}
+      
+      <h3>Visual Results</h3>
+      <div class="project-images">
+        <div class="image-row">
+          <div class="image-container">
+            <img src="/assets/images/original_filter.png" alt="Original Image">
+            <p class="caption">Original Image</p>
+          </div>
+          <div class="image-container">
+            <img src="/assets/images/cartoon_filter.png" alt="Cartoon Filter">
+            <p class="caption">Cartoon Filter</p>
+          </div>
+        </div>
+        <div class="image-row">
+          <div class="image-container">
+            <img src="/assets/images/sketch_filter.png" alt="Sketch Filter">
+            <p class="caption">Sketch Filter</p>
+          </div>
+          <div class="image-container">
+            <img src="/assets/images/depth_filter.png" alt="Depth Estimation">
+            <p class="caption">Depth Estimation</p>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Performance Optimization</h3>
+      <p>The project includes performance comparisons between different implementations of the same filter. For example, the blur filter has two implementations: a direct implementation and a separable implementation that is more efficient:</p>
+      
+      {% highlight cpp %}
+// Direct 5x5 blur implementation
+int blur5x5_1(cv::Mat &src, cv::Mat &dst) {
+    // Implementation with nested loops for the full 5x5 kernel
+    // ...
+}
+
+// Separable 5x5 blur implementation (more efficient)
+int blur5x5_2(cv::Mat &src, cv::Mat &dst) {
+    // First horizontal pass
+    cv::Mat temp(src.size(), CV_8UC3);
+    int kernel[5] = {1, 2, 4, 2, 1};
+    int kernelSum = 10;
+    
+    // Horizontal pass
+    for (int i = 0; i < src.rows; i++) {
+        for (int j = 0; j < src.cols; j++) {
+            int sumB = 0, sumG = 0, sumR = 0;
+            
+            // Apply horizontal kernel
+            for (int k = -2; k <= 2; k++) {
+                int col = j + k;
+                // Border handling
+                col = std::max(0, std::min(col, src.cols - 1));
+                
+                const uchar* pixel = src.ptr<uchar>(i) + (col * 3);
+                sumB += pixel[0] * kernel[k + 2];
+                sumG += pixel[1] * kernel[k + 2];
+                sumR += pixel[2] * kernel[k + 2];
+            }
+            
+            // Store intermediate results
+            uchar* tempPixel = temp.ptr<uchar>(i) + (j * 3);
+            tempPixel[0] = (uchar)(sumB / kernelSum);
+            tempPixel[1] = (uchar)(sumG / kernelSum);
+            tempPixel[2] = (uchar)(sumR / kernelSum);
+        }
+    }
+    
+    // Vertical pass
+    // ...
+}
+      {% endhighlight %}
+      
+      <h3>Technologies Used</h3>
+      <ul>
+        <li>C++ for core implementation</li>
+        <li>OpenCV for image processing and video capture</li>
+        <li>Haar cascades for face detection</li>
+        <li>ONNX Runtime for neural network inference</li>
+        <li>Depth Anything V2 for depth estimation</li>
+      </ul>
+      
+      <h3>Future Improvements</h3>
+      <ul>
+        <li>Add more advanced filters like neural style transfer</li>
+        <li>Implement GPU acceleration for real-time performance</li>
+        <li>Create a graphical user interface for easier filter selection</li>
+        <li>Add support for video recording with applied filters</li>
+        <li>Implement more sophisticated face filters using facial landmarks</li>
+      </ul>
     </div>
   </details>
 </div>
