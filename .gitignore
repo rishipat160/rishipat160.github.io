@@ -30,3 +30,10 @@ codekit-config.json
 .sass-cache
 _asset_bundler_cache
 _site
+
+Rakefile
+.travis.yml
+vendor
+docs
+assets/js/lunr
+_sass/minimal-mistakes/vendor
