@@ -15,7 +15,7 @@ classes: wide
   
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Standard Library</span>
-    <a href="https://github.com/rishipat160/CppObjectRecognition" class="project-link"><i class="fab fa-github"></i> Code</a>
+    <a href="https://github.com/rishipat160/CppObjectRecognition" class="project-link"><i class="fab fa-github"></i> View Code</a>
     <a href="https://www.youtube.com/watch?v=UCClHovymdE" class="project-link"><i class="fas fa-play-circle"></i> Demo</a>
     <a href="/assets/files/object_recognition_paper.pdf" class="project-link"><i class="fas fa-file-pdf"></i> Paper</a>
   </div>
@@ -346,34 +346,34 @@ clean:
 </div>
 
 <div class="project-card" id="realtime-filters">
-  <h2>Real-time Filters Application with OpenCV: Interactive Image Processing</h2>
+  <h2>Real-time Video Filtering Application with OpenCV: Interactive Processing</h2>
   
   <div class="project-metadata">
-    <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Image Processing</span>
-    <a href="https://github.com/rishipat160/VideoFilters" class="project-link"><i class="fab fa-github"></i> Code</a>
+    <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Video Processing</span>
+    <a href="https://github.com/rishipat160/VideoFilters" class="project-link"><i class="fab fa-github"></i> View Code</a>
   </div>
 
   <div class="project-summary">
     <ul>
       <li>Developed a real-time video filtering application with interactive controls</li>
-      <li>Implemented various image processing algorithms for visual effects</li>
-      <li>Created a user-friendly interface for combining and customizing filters</li>
+      <li>Implemented various video processing algorithms for live visual effects</li>
+      <li>Created a user-friendly interface for combining and customizing filters on webcam feed</li>
     </ul>
   </div>
 
   <details>
     <summary><strong>Project Overview</strong></summary>
     <div class="project-details">
-      <p>This project implements a real-time video filtering application using OpenCV and C++. The system applies various image processing filters to webcam input in real-time, allowing users to interactively modify and combine different effects.</p>
+      <p>This project implements a real-time video filtering application using OpenCV and C++. The system captures live webcam feed and applies various processing filters in real-time, allowing users to interactively modify and combine different effects while viewing the results immediately.</p>
       
       <h3>Key Features</h3>
       <ul>
-        <li>Real-time video capture and processing</li>
+        <li>Real-time video capture and processing from webcam</li>
         <li>Multiple filter implementations including grayscale, sepia, blur, edge detection, and more</li>
         <li>Face detection using Haar cascades</li>
         <li>Creative filters like cartoon and sketch effects</li>
         <li>Depth estimation using Depth Anything V2 neural network</li>
-        <li>Interactive keyboard controls for toggling effects</li>
+        <li>Interactive keyboard controls for toggling effects on the live video</li>
       </ul>
       
       <h3>Filter Implementations</h3>
@@ -549,6 +549,7 @@ switch(key) {
     case 'k': filters[SKETCH] = !filters[SKETCH]; break;
     case 'j': filters[ALT_GRAY2] = !filters[ALT_GRAY2]; break;
 }
+
       {% endhighlight %}
       
       <h3>Visual Results</h3>
@@ -633,10 +634,8 @@ int blur5x5_2(cv::Mat &src, cv::Mat &dst) {
       
       <h3>Future Improvements</h3>
       <ul>
-        <li>Add more advanced filters like neural style transfer</li>
-        <li>Implement GPU acceleration for real-time performance</li>
         <li>Create a graphical user interface for easier filter selection</li>
-        <li>Add support for video recording with applied filters</li>
+        <li>Add support for video recording with applied filters instead of just images</li>
         <li>Implement more sophisticated face filters using facial landmarks</li>
       </ul>
     </div>
