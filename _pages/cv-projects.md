@@ -350,7 +350,7 @@ clean:
   
   <div class="project-metadata">
     <span class="project-tech"><i class="fab fa-cuttlefish"></i> C++, OpenCV, Video Processing</span>
-    <a href="https://github.com/rishipat160/VideoFilters" class="project-link"><i class="fab fa-github"></i> View Code</a>
+    <a href="https://github.com/rishipat160/OpenCVFilters" class="project-link"><i class="fab fa-github"></i> View Code</a>
   </div>
 
   <div class="project-summary">
